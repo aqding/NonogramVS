@@ -1,0 +1,15 @@
+.board {
+  display: grid;
+  width: 500px;
+  height: 500px;
+  border-color: black;
+  border-style: solid;
+  border-width: 0.5px;
+}
+
+.box {
+  border-width: 0.5px;
+  border-color: black;
+  border-style: solid;
+  user-select: none;
+}
