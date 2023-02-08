@@ -1,15 +1,54 @@
 .board {
   display: grid;
-  width: 500px;
-  height: 500px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
   border-color: black;
-  border-style: solid;
-  border-width: 0.5px;
+  border-bottom-style: solid;
+  border-right-style: solid;
 }
 
 .box {
-  border-width: 0.5px;
+  border-left-width: 1px;
+  border-top-width: 1px;
+  border-bottom-width: 0;
+  border-right-width: 0;
   border-color: black;
   border-style: solid;
   user-select: none;
+}
+
+.valueBoxLeft {
+  border-left-width: 2px;
+  border-top-width: 1px;
+  border-color: black;
+  border-left-style: solid;
+  border-top-style: solid;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 5px;
+  font-weight: bold;
+  gap: 5px;
+}
+
+.valueBoxTop {
+  border-left-width: 1px;
+  border-top-width: 2px;
+  border-color: black;
+  border-left-style: solid;
+  border-top-style: solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.borderLeft {
+  border-left-width: 2px;
+}
+
+.borderTop {
+  border-top-width: 2px;
 }

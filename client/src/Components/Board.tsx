@@ -11,6 +11,8 @@ export const enum SPACE {
 export type boardProps = {
   width: number;
   height: number;
+  rowHints: Array<Array<number>>;
+  colHints: Array<Array<number>>;
 };
 
 /**
@@ -85,14 +87,25 @@ const Board = (props: boardProps) => {
         onMouseDown={() => setMouseDown(true)}
         onMouseUp={() => setMouseDown(false)}
         style={{
-          gridTemplateColumns: `repeat(${props.width}, 1fr)`,
-          gridTemplateRows: `repeat(${props.height}, 1fr)`,
+          gridTemplateColumns: `100px repeat(${props.width}, 30px)`,
+          gridTemplateRows: `100px repeat(${props.height}, 30px)`,
+          width: `${props.width * 30 + 100}px`,
+          height: `${props.height * 30 + 100}px`,
         }}
       >
         {board.map((row, rowNumber) => {
           return row.map((value, colNumber) => (
             <div
-              className="box"
+              className={
+                `box` +
+                (colNumber % 5 === 4 ? " borderRight" : "") +
+                (colNumber % 5 === 0 ? " borderLeft" : "") +
+                (rowNumber % 5 === 4 ? " borderBottom" : "") +
+                (rowNumber % 5 === 0 ? " borderTop" : "")
+              }
+              style={{
+                gridArea: `${2 + rowNumber} / ${2 + colNumber}`,
+              }}
               key={`${rowNumber}` + `${colNumber}`}
               onMouseEnter={() => handleMouseEnter(rowNumber, colNumber)}
               onMouseDown={() => {
@@ -102,6 +115,36 @@ const Board = (props: boardProps) => {
               <Tile value={value} />
             </div>
           ));
+        })}
+        {props.rowHints.map((values, rowNumber) => {
+          return (
+            <div
+              className="valueBoxLeft"
+              style={{
+                gridArea: `${2 + rowNumber}`,
+                borderTopWidth: `${rowNumber % 5 === 0 ? "2px" : "1px"}`,
+              }}
+            >
+              {values.map((value) => (
+                <div>{value}</div>
+              ))}
+            </div>
+          );
+        })}
+        {props.colHints.map((values, colNumber) => {
+          return (
+            <div
+              className="valueBoxTop"
+              style={{
+                gridArea: `1 / ${2 + colNumber}`,
+                borderLeftWidth: `${colNumber % 5 === 0 ? "2px" : "1px"}`,
+              }}
+            >
+              {values.map((value) => (
+                <div>{value}</div>
+              ))}
+            </div>
+          );
         })}
       </div>
       <button onClick={handleFillChange}>

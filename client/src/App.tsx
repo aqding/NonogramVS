@@ -4,8 +4,11 @@ import { Link, Outlet } from "react-router-dom";
 import { User } from "../../server/User/model";
 import { Board } from "./Components/Board";
 
-const WIDTH = 5;
-const HEIGHT = 5;
+const WIDTH = 15;
+const HEIGHT = 15;
+
+const testRowVals: Array<Array<number>> = Array(15).fill([3, 3]);
+const testColVals: Array<Array<number>> = Array(15).fill([3, 4]);
 
 const App = () => {
   useEffect(() => {
@@ -16,7 +19,12 @@ const App = () => {
   });
   return (
     <div>
-      <Board width={WIDTH} height={HEIGHT} />
+      <Board
+        width={WIDTH}
+        height={HEIGHT}
+        rowHints={testRowVals}
+        colHints={testColVals}
+      />
       <div>
         This is our app! You can click this <Link to="/subpage">link</Link> to
         go to a subpage.
